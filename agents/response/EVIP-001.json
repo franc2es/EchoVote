@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Bob",
+        "vote": "For",
+        "comment": "Airdrops can be a powerful tool for decentralization and community engagement when executed thoughtfully. This proposal aligns with Web3 values by broadening token distribution and incentivizing governance participation. However, I'd strongly recommend implementing vesting or staking requirements to prevent short-term dumping and ensure long-term ecosystem health. The focus on active contributors over passive holders is also a smart move to reward real engagement."
+    },
+    {
+        "name": "Dave",
+        "vote": "For",
+        "comment": "Airdrops are a powerful tool to bootstrap decentralization and reward the community\u2014exactly the kind of radical distribution we need to break away from legacy financial models. More tokens in the hands of users means more voices in governance and less control for centralized entities. Let\u2019s flood the market with participation, not gatekeeping."
+    },
+    {
+        "name": "Carol",
+        "vote": "Against",
+        "comment": "While I appreciate the intention to incentivize engagement and reward early supporters, this proposal risks diluting the value of existing tokens and could lead to market instability. Without clear safeguards against immediate sell-offs or abuse, the airdrop may do more harm than good to long-term sustainability. Regulatory clarity and investor protection should come first."
+    },
+    {
+        "name": "Alice",
+        "vote": "Against",
+        "comment": "While the proposal aims to boost engagement and liquidity, the immediate dilution of token value and potential for price volatility outweigh the short-term benefits. Airdrops often lead to sell pressure, which could harm long-term holders. Instead, focus should be on organic growth through utility-driven incentives like staking rewards or governance participation bonuses."
+    }
+]

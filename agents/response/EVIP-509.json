@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Bob",
+        "vote": "Against",
+        "comment": "While higher quorum requirements may seem like a good way to increase legitimacy, they often lead to voter fatigue and reduced participation over time. This change could disproportionately favor whales or centralized entities who can easily meet the threshold, while smaller holders may feel their votes don't matter. True decentralization means making governance accessible, not creating higher barriers to participation."
+    },
+    {
+        "name": "Dave",
+        "vote": "Against",
+        "comment": "This proposal reeks of centralization and gatekeeping. Raising the quorum only makes it harder for smaller, disruptive voices to be heard\u2014exactly what the establishment wants. True decentralization means empowering the edges, not creating more barriers to participation. Keep the quorum low and let chaos reign\u2014that\u2019s how real innovation happens."
+    },
+    {
+        "name": "Carol",
+        "vote": "For",
+        "comment": "Increasing the quorum requirement to 800,000 tokens aligns with my belief in stability and legitimacy in governance. A higher threshold ensures decisions are made with broader community support, reducing the risk of hasty or poorly supported changes. While there may be challenges in reaching the new quorum, the long-term benefits of more robust and representative decision-making outweigh these concerns."
+    },
+    {
+        "name": "Alice",
+        "vote": "For",
+        "comment": "Increasing the quorum requirement to 800,000 tokens aligns with data-driven governance best practices, ensuring decisions are more representative and legitimate. While it may slow down approvals, the trade-off for higher-quality, community-backed proposals is worth the potential delay. This change also mitigates risks of low-engagement decisions, which can harm long-term protocol health."
+    }
+]
