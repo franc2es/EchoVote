@@ -89,65 +89,96 @@
 .proposal-decision {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   margin-top: 0.5rem;
   padding: 0.5rem 0.8rem;
   background-color: #242424;
   border-radius: 6px;
-  border: 1px solid #333;
-  width: fit-content;
+  border: 1px solid;
+  font-size: 0.9rem;
   transition: all 0.2s ease;
+  width: fit-content;
 }
 
-.proposal-item:hover .proposal-decision {
-  background-color: #2a2a2a;
+.decision-container {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  white-space: nowrap;
 }
 
 .proposal-decision.for {
   border-color: rgba(0, 255, 157, 0.3);
 }
 
-.proposal-item:hover .proposal-decision.for {
-  border-color: rgba(0, 255, 157, 0.5);
-  box-shadow: 0 0 10px rgba(0, 255, 157, 0.1);
-}
-
 .proposal-decision.against {
   border-color: rgba(255, 77, 77, 0.3);
-}
-
-.proposal-item:hover .proposal-decision.against {
-  border-color: rgba(255, 77, 77, 0.5);
-  box-shadow: 0 0 10px rgba(255, 77, 77, 0.1);
 }
 
 .proposal-decision.abstain {
   border-color: rgba(179, 179, 179, 0.3);
 }
 
-.proposal-item:hover .proposal-decision.abstain {
-  border-color: rgba(179, 179, 179, 0.5);
-  box-shadow: 0 0 10px rgba(179, 179, 179, 0.1);
-}
-
 .proposal-decision-label {
   color: #888;
-  font-size: 0.9rem;
 }
 
 .proposal-decision-value {
   font-weight: 500;
-  font-size: 0.9rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
 }
 
 .proposal-decision-value.for {
   color: #00ff9d;
+  background-color: rgba(0, 255, 157, 0.1);
 }
 
 .proposal-decision-value.against {
   color: #ff4d4d;
+  background-color: rgba(255, 77, 77, 0.1);
 }
 
 .proposal-decision-value.abstain {
   color: #b3b3b3;
+  background-color: rgba(179, 179, 179, 0.1);
+}
+
+.assessment-prompt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  background-color: #242424;
+  border-radius: 6px;
+  border: 1px solid rgba(229, 255, 0, 0.3);
+  color: #888;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-align: left;
+}
+
+.assessment-prompt:hover {
+  background-color: #2a2a2a;
+  border-color: rgba(255, 230, 0, 0.5);
+  color: #646cff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(255, 230, 0, 0.15);
+}
+
+.assessment-prompt:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.prompt-icon {
+  font-size: 1.2rem;
+  opacity: 0.8;
+  transition: transform 0.2s ease;
+}
+
+.assessment-prompt:hover .prompt-icon {
+  transform: translateX(4px);
+  opacity: 1;
 } 

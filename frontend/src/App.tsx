@@ -4,10 +4,15 @@ import viteLogo from '/vite.svg'
 import './styles/App.css'
 import ProposalStream from './components/ProposalStream'
 import EchoVote from './components/EchoVote'
+import ValuesQuestionnaire from './components/ValuesQuestionnaire'
+import { PrivyProvider, usePrivy } from '@privy-io/react-auth'
 
-function App() {
+// Create a wrapper component to use Privy hooks
+function AppContent() {
   const [count, setCount] = useState(0)
   const [activeEchoTab, setActiveEchoTab] = useState('YourEcho')
+  const [value_vec, setValueVec] = useState<number[]>([])
+  const [showQuestionnaire, setShowQuestionnaire] = useState(false)
   const [cryptoList, setCryptoList] = useState([
     { name: 'Bitcoin', symbol: 'BTC', price: 0, change24h: 0, icon: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png', isChecked: true, isFollowed: true },
     { name: 'Ethereum', symbol: 'ETH', price: 0, change24h: 0, icon: 'https://cryptologos.cc/logos/ethereum-eth-logo.png', isChecked: true, isFollowed: true },
@@ -15,16 +20,21 @@ function App() {
     { name: 'Cardano', symbol: 'ADA', price: 0, change24h: 0, icon: 'https://cryptologos.cc/logos/cardano-ada-logo.png', isChecked: false, isFollowed: false },
     { name: 'Polkadot', symbol: 'DOT', price: 0, change24h: 0, icon: 'https://cryptologos.cc/logos/polkadot-new-dot-logo.png', isChecked: false, isFollowed: false },
   ])
-  const [userAddress, setUserAddress] = useState('0x1234567890abcdef1234567890abcdef12345678')
+  const { login, logout, authenticated, user } = usePrivy()
+  const [userAddress, setUserAddress] = useState('')
 
-  const handleConnectWallet = () => {
-    // TODO: Implement wallet connection logic
-    console.log('Connecting wallet...')
-  }
+  useEffect(() => {
+    if (authenticated && user?.wallet?.address) {
+      setUserAddress(user.wallet.address)
+    } else {
+      setUserAddress('')
+    }
+  }, [authenticated, user])
 
   const formatAddress = (address: string) => {
-    if (address.length <= 10) return address;
-    return `${address.slice(0, 7)}...${address.slice(-5)}`;
+    if (!address) return 'Not Connected'
+    if (address.length <= 10) return address
+    return `${address.slice(0, 7)}...${address.slice(-5)}`
   }
 
   const toggleCheck = (index: number) => {
@@ -32,16 +42,16 @@ function App() {
       prevList.map((crypto, i) => 
         i === index ? { ...crypto, isChecked: !crypto.isChecked } : crypto
       )
-    );
-  };
+    )
+  }
 
   const toggleFollow = (index: number) => {
     setCryptoList(prevList => 
       prevList.map((crypto, i) => 
         i === index ? { ...crypto, isFollowed: !crypto.isFollowed } : crypto
       )
-    );
-  };
+    )
+  }
 
   useEffect(() => {
     const fetchCryptoPrices = async () => {
@@ -62,10 +72,7 @@ function App() {
       }
     }
 
-    // Fetch immediately
     fetchCryptoPrices()
-
-    // Update every 30 seconds
     const interval = setInterval(fetchCryptoPrices, 30000)
     return () => clearInterval(interval)
   }, [])
@@ -83,58 +90,99 @@ function App() {
     return `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`
   }
 
+  const handleOpenQuestionnaire = () => {
+    setShowQuestionnaire(true);
+  };
+
+  const handleCloseQuestionnaire = () => {
+    setShowQuestionnaire(false);
+  };
+
   return (
     <>
       <header className="header">
         <img src={viteLogo} className="header-logo" alt="Logo" />
-        <button className="connect-wallet-btn" onClick={handleConnectWallet}>
-          Connect Wallet
-        </button>
+        {authenticated ? (
+          <button className="connect-wallet-btn" onClick={logout}>
+            Disconnect
+          </button>
+        ) : (
+          <button className="connect-wallet-btn" onClick={login}>
+            Connect Wallet
+          </button>
+        )}
       </header>
 
       <div className="container">
         <div className="row_basic">
           <div className="avatar-column">
             <div className="avatar">
-              <span className="avatar-placeholder">👤</span>
+              {authenticated ? (
+                <img 
+                  src="https://avatars.githubusercontent.com/u/118011772" 
+                  alt="User Avatar" 
+                  className="avatar-image"
+                />
+              ) : (
+                <span className="avatar-placeholder">👤</span>
+              )}
             </div>
             <h2>User Profile</h2>
             <div className="user-address">{formatAddress(userAddress)}</div>
-            <p>Connected</p>
+            <p>{authenticated ? 'Connected' : 'Not Connected'}</p>
           </div>
 
           <div className="crypto-column">
             <h1 className="fancy-title">Portfolio</h1>
-            <ul className="crypto-list">
-              {cryptoList.map((crypto, index) => (
-                <li key={index} className="crypto-item">
-                  <span className="crypto-name">
-                    <span 
-                      className={`checkbox-icon ${crypto.isChecked ? 'checked' : ''}`}
-                      onClick={() => crypto.isChecked && toggleFollow(index)}
-                      title={!crypto.isChecked ? "No Governance" : (crypto.isFollowed ? "Following" : "Not Following")}
-                    >
-                      {!crypto.isChecked ? '×' : (crypto.isFollowed ? '❤️‍🔥' : '🖤')}
+            {authenticated ? (
+              <ul className="crypto-list">
+                {cryptoList.map((crypto, index) => (
+                  <li key={index} className="crypto-item">
+                    <span className="crypto-name">
+                      <span 
+                        className={`checkbox-icon ${crypto.isChecked ? 'checked' : ''}`}
+                        onClick={() => crypto.isChecked && toggleFollow(index)}
+                        title={!crypto.isChecked ? "No Governance" : (crypto.isFollowed ? "Following" : "Not Following")}
+                      >
+                        {!crypto.isChecked ? '×' : (crypto.isFollowed ? '❤️‍🔥' : '🖤')}
+                      </span>
+                      <img src={crypto.icon} alt={crypto.name} className="crypto-icon" />
+                      {crypto.name}
                     </span>
-                    <img src={crypto.icon} alt={crypto.name} className="crypto-icon" />
-                    {crypto.name}
-                  </span>
-                  <span className="crypto-price">
-                    {formatPrice(crypto.price)}
-                    <span className={`price-change ${crypto.change24h >= 0 ? 'positive' : 'negative'}`}>
-                      {formatChange(crypto.change24h)}
+                    <span className="crypto-price">
+                      {formatPrice(crypto.price)}
+                      <span className={`price-change ${crypto.change24h >= 0 ? 'positive' : 'negative'}`}>
+                        {formatChange(crypto.change24h)}
+                      </span>
                     </span>
-                  </span>
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="connect-prompt">
+                <p>Connect your wallet to view your portfolio</p>
+                <button className="connect-wallet-btn" onClick={login}>
+                  Connect Wallet
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
         <div className="proposal-container">
-          <ProposalStream />
-          <EchoVote />
+          <ProposalStream 
+            value_vec={value_vec} 
+            onOpenQuestionnaire={handleOpenQuestionnaire}
+          />
+          <EchoVote 
+            value_vec={value_vec} 
+            onOpenQuestionnaire={handleOpenQuestionnaire}
+          />
         </div>
+
+        {showQuestionnaire && (
+          <ValuesQuestionnaire onClose={handleCloseQuestionnaire} />
+        )}
       </div>
 
       <footer className="footer">
@@ -176,4 +224,23 @@ function App() {
   )
 }
 
+// Main App component with PrivyProvider
+function App() {
+  return (
+    <PrivyProvider
+      appId={import.meta.env.VITE_PRIVY_APP_ID}
+      config={{
+        loginMethods: ['email', 'wallet'],
+        appearance: {
+          theme: 'dark',
+          accentColor: '#646cff',
+        },
+      }}
+    >
+      <AppContent />
+    </PrivyProvider>
+  )
+}
+
 export default App
+
