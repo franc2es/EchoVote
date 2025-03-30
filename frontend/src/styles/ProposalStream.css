@@ -1,0 +1,153 @@
+.proposal-container {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  align-items: flex-start;
+}
+
+.proposal-stream {
+  flex: 2;
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+}
+
+.proposal-header {
+  margin-bottom: 1rem;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #333;
+}
+
+.proposal-header .fancy-title {
+  margin: 0;
+}
+
+.proposal-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.proposal-item {
+  background-color: #242424;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: left;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  position: relative;
+}
+
+.proposal-item:hover {
+  transform: translateX(4px);
+  background-color: #2a2a2a;
+  border-color: #333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.proposal-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.proposal-item:hover .proposal-title {
+  color: #646cff;
+}
+
+.proposal-tag {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  background-color: #333;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+
+.proposal-item:hover .proposal-tag {
+  background-color: #444;
+  transform: scale(1.05);
+}
+
+.proposal-content {
+  color: #888;
+  margin: 0.5rem 0;
+  transition: color 0.2s ease;
+}
+
+.proposal-item:hover .proposal-content {
+  color: #aaa;
+}
+
+.proposal-decision {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.8rem;
+  background-color: #242424;
+  border-radius: 6px;
+  border: 1px solid #333;
+  width: fit-content;
+  transition: all 0.2s ease;
+}
+
+.proposal-item:hover .proposal-decision {
+  background-color: #2a2a2a;
+}
+
+.proposal-decision.for {
+  border-color: rgba(0, 255, 157, 0.3);
+}
+
+.proposal-item:hover .proposal-decision.for {
+  border-color: rgba(0, 255, 157, 0.5);
+  box-shadow: 0 0 10px rgba(0, 255, 157, 0.1);
+}
+
+.proposal-decision.against {
+  border-color: rgba(255, 77, 77, 0.3);
+}
+
+.proposal-item:hover .proposal-decision.against {
+  border-color: rgba(255, 77, 77, 0.5);
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.1);
+}
+
+.proposal-decision.abstain {
+  border-color: rgba(179, 179, 179, 0.3);
+}
+
+.proposal-item:hover .proposal-decision.abstain {
+  border-color: rgba(179, 179, 179, 0.5);
+  box-shadow: 0 0 10px rgba(179, 179, 179, 0.1);
+}
+
+.proposal-decision-label {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.proposal-decision-value {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.proposal-decision-value.for {
+  color: #00ff9d;
+}
+
+.proposal-decision-value.against {
+  color: #ff4d4d;
+}
+
+.proposal-decision-value.abstain {
+  color: #b3b3b3;
+} 
